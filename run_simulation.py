@@ -9,8 +9,7 @@ from tqdm import tqdm
 num_agents = 100
 timelimits = 100
 
-# c_rand()
-
+# %% Cython版のシミュレーション
 start_cy = time.time()
 simulation_cy = infection_cy.InfectionSimulationCy(
     num_agents=num_agents,
@@ -22,9 +21,7 @@ simulation_cy.run()
 dur_cy = time.time() - start_cy
 print(dur_cy)
 
-print(np.asarray(simulation_cy.all_pos)[-3:])
-
-
+# %% 純粋Python版のシミュレーション
 start_pure = time.time()
 simulation_pure = infection_py.InfectionSimulationPy(
     num_agents=num_agents,
@@ -35,12 +32,10 @@ simulation_pure.run()
 dur_pure = time.time() - start_pure
 print(dur_pure)
 
-
 print('cython is faster: ', dur_pure / dur_cy)
 
-
-import gc; gc.collect()
-def animate_simulation(sim, duration, save_as='tmp.gif') -> None:
+# %% シミュレーションの様子をアニメーションにする
+def animate_simulation(sim, duration, save_as='tmp.gif'):
 
     fig, ax = plt.subplots(figsize=(6, 6))
 
@@ -63,3 +58,5 @@ def animate_simulation(sim, duration, save_as='tmp.gif') -> None:
     anim = FuncAnimation(fig, update, frames=tqdm(duration))
     anim.save(save_as)
     plt.close()
+
+# animate_simulation(simulation_cy, range(100), save_as='simulation.gif')
