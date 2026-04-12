@@ -1,3 +1,5 @@
+https://note.com/tomosub/n/nbc75837ef887
+
 [Python高速化] 実践例から学ぶCython入門
 
 上の記事のソースコードや資料です。
