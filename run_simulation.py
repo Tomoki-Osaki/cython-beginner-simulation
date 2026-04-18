@@ -8,14 +8,15 @@ from tqdm import tqdm
 
 num_agents = 100
 timelimits = 100
+field_size = 20
 
 # %% Cython版のシミュレーション
 start_cy = time.time()
 simulation_cy = infection_cy.InfectionSimulationCy(
     num_agents=num_agents,
     timelimits=timelimits,
-    seed=5,
-    field_size=20
+    field_size=field_size,
+    seed=5
 )
 simulation_cy.run()
 dur_cy = time.time() - start_cy
@@ -26,7 +27,7 @@ start_pure = time.time()
 simulation_pure = infection_py.InfectionSimulationPy(
     num_agents=num_agents,
     timelimits=timelimits,
-    field_size=100
+    field_size=field_size,
 )
 simulation_pure.run()
 dur_pure = time.time() - start_pure
